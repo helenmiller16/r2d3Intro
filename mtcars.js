@@ -11,8 +11,11 @@
 
 var h = height,
   w = width,
-  m = 50,
-  color = (options && options.color) || "black";
+  m = 50
+  color = "black";
+
+if (options != undefined) color = options.color
+
 var xscale = d3
   .scaleLinear()
   .domain([

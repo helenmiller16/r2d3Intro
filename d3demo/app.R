@@ -22,7 +22,7 @@ ui <- fluidPage(
 
         mainPanel(
            d3Output("d3Plot"),
-           textOutput("carOutput")
+           textOutput("selectedModel")
         )
     )
 )
@@ -40,7 +40,7 @@ server <- function(input, output) {
         r2d3(data, "mtcarsShiny.js")
     })
     
-    output$carOutput <- renderText(req(input$carInput))
+    output$selectedModel <- renderText(req(input$selectedModel))
 }
 
 # Run the application 

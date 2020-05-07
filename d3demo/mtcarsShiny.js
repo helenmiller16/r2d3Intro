@@ -37,7 +37,7 @@ dots
   .attr("cx", (d) => xscale(d.x))
   .attr("cy", (d) => yscale(d.y))
   .attr("r", 5)
-  .on("click", (d) => Shiny.setInputValue("carInput", d.model));
+  .on("click", (d) => Shiny.setInputValue("selectedModel", d.model));
 
 var xaxis = svg
   .select("#xaxis")
