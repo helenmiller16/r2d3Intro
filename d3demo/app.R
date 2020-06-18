@@ -17,7 +17,7 @@ ui <- fluidPage(
     sidebarLayout(
         sidebarPanel(
             selectInput("xaxis", label = "x axis", choices = names(mtcars)),
-            selectInput("yaxis", label = "y axis", choices = names(mtcars))
+            selectInput("yaxis", label = "y axis", choices = names(mtcars), selected = "hp")
         ),
 
         mainPanel(
@@ -34,10 +34,8 @@ server <- function(input, output) {
         
         data <- mtcars
         data$model <- rownames(mtcars)
-        data$x <- mtcars[, input$xaxis,]
-        data$y <- mtcars[, input$yaxis,]
     
-        r2d3(data, "mtcarsShiny.js")
+        r2d3(data, "mtcarsShiny.js", options=list(x = input$xaxis, y = input$yaxis))
     })
     
     output$selectedModel <- renderText(req(input$selectedModel))

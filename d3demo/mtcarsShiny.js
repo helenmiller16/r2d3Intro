@@ -3,6 +3,9 @@
 // height
 // width
 // svg
+// options: x, y
+
+var x = options.x, y = options.y;
 
 if (svg.selectAll("g").empty) {
   svg.append("g").attr("id", "xaxis");
@@ -16,15 +19,15 @@ var h = height,
 var xscale = d3
   .scaleLinear()
   .domain([
-    Math.min(...data.map((d) => d.x)),
-    Math.max(...data.map((d) => d.x)),
+    Math.min(...data.map((d) => d[x])),
+    Math.max(...data.map((d) => d[x])),
   ])
   .range([m, w - m]);
 var yscale = d3
   .scaleLinear()
   .domain([
-    Math.min(...data.map((d) => d.y)),
-    Math.max(...data.map((d) => d.y)),
+    Math.min(...data.map((d) => d[y])),
+    Math.max(...data.map((d) => d[y])),
   ])
   .range([h - m, m]);
 
@@ -34,8 +37,8 @@ dots
   .enter()
   .append("circle")
   .attr("fill", "black")
-  .attr("cx", (d) => xscale(d.x))
-  .attr("cy", (d) => yscale(d.y))
+  .attr("cx", (d) => xscale(d[x]))
+  .attr("cy", (d) => yscale(d[y]))
   .attr("r", 5)
   .on("click", (d) => Shiny.setInputValue("selectedModel", d.model));
 
@@ -57,5 +60,5 @@ dots.exit().remove();
 dots
   .transition()
   .duration(1000)
-  .attr("cx", (d) => xscale(d.x))
-  .attr("cy", (d) => yscale(d.y));
+  .attr("cx", (d) => xscale(d[x]))
+  .attr("cy", (d) => yscale(d[y]));
